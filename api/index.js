@@ -33,7 +33,7 @@ app.get('*', (req, res) => {
 })
  
 
-app.listen(process.env.PORT,()=>console.log(`server is Runing on Port ${process.env.PORT}`)
+app.listen(3000,()=>console.log(`server is Runing on Port ${process.env.PORT}`)
 );
 
 //middleware for error handiling
