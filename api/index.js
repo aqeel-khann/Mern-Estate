@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path"
 dotenv.config();
 
 app.use(express.json());
@@ -18,10 +19,18 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((error) => console.log("Error in DB Connection:", error));
 
+const __dirname = path.resolve();
+
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
 app.use("/api/listing",ListingRouter)
 
+
+app.use(express.static(path.join(__dirname, '/client/dist')))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'client','dist','index.html'))
+})
  
 
 app.listen(process.env.PORT,()=>console.log(`server is Runing on Port ${process.env.PORT}`)
